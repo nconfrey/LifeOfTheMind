@@ -3,36 +3,46 @@ using System.Collections;
 using System;
 using SharpOSC;
 
-public class Muse : MonoBehaviour
+public class Muse : MonoBehaviour {
+
+	public UDPListener listener;
+
+	void Start() 
 	{
-		void Start() {
-				// Callback function for received OSC messages. 
-				// Prints EEG and Relative Alpha data only.
+		// Callback function for received OSC messages. 
+		// Prints EEG and Relative Alpha data only.
 		print("starting muse serv");
-				HandleOscPacket callback = delegate(OscPacket packet)
-				{
-					var messageReceived = (OscMessage)packet;
-					var addr = messageReceived.Address;
-					if(addr == "/muse/eeg") {
-					print("EEG values: ");
-						foreach(var arg in messageReceived.Arguments) {
+		HandleOscPacket callback = delegate(OscPacket packet)
+		{
+			var messageReceived = (OscMessage)packet;
+			var addr = messageReceived.Address;
+			if(addr == "/muse/eeg") {
+				print("EEG values: ");
+				foreach(var arg in messageReceived.Arguments) {
 					print(arg + " ");
-						}
-					}
-					if(addr == "/muse/elements/alpha_relative") {
-					print("Relative Alpha power values: ");
-						foreach(var arg in messageReceived.Arguments) {
-						print(arg + " ");
-						}
-					}
-				};
+				}
+			}
+			if(addr == "/muse/elements/alpha_relative") {
+			print("Relative Alpha power values: ");
+				foreach(var arg in messageReceived.Arguments) {
+					print(arg + " ");
+				}
+			}
+		};
 
-				// Create an OSC server.
-				var listener = new UDPListener(5000, callback);
+		// Create an OSC server.
+		listener = new UDPListener(5000, callback);
 
-		}
+	}
 
-	void Update() {
+	void Update() 
+	{
+		
+	}
+
+	void OnApplicationQuit() 
+	{
+		listener.Close();
 	}
 }	
 
