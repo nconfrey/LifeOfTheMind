@@ -20,14 +20,12 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		overrideInput();
-		/*
+		//overrideInput();
 		if (Time.realtimeSinceStartup % 10 > 5) {
 			rb.AddForce (tr.right * Speed);
 		} else {
 			rb.AddForce (tr.right * -1 * Speed);	
 		}
-		*/
 
 		//Limiting the speed of the player
 		if(rb.velocity.x > maxSpeed)
