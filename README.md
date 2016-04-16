@@ -1,5 +1,9 @@
 # LifeOfTheMind
 
+## DevBranch -- MUSE
+
+This is the branch for integrating the Muse into the game.
+
 ## Welcome
 
 Welcome to UChicago, home of "Life of the Mind" aka "Where Fun Goes to Die."  
