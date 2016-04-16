@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 	public float Speed = 50;
 	public float maxSpeed = 10;
 	public float velocity = 0;
+	public int direction = 0;
 
 	private Rigidbody2D rb;
 	private Transform tr;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour {
 	{
 		//Moving the player
 		float h = Input.GetAxis("Horizontal");
+		direction = (int)h;
 		rb.AddForce(tr.right * h * Speed);
 		velocity = rb.velocity.magnitude;
 
