@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 		createNewVillager(5,50);
 
 		//Uncomment this when we are ready to generate worlds
-		boardScript.worldSetup();
+		//boardScript.worldSetup();
 	}
 
 	public void createNewVillager(int xLoc, int yLoc)
@@ -68,10 +68,10 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void smite(int x, int y)
-	{
-		Instantiate (lightning, new Vector3(x,y, -1), Quaternion.identity);
-	}
+//	public void smite(int x, int y)
+//	{
+//		Instantiate (lightning, new Vector3(x,y, -1), Quaternion.identity);
+//	}
 
 	void moveVillagers()
 	{
@@ -91,9 +91,6 @@ public class GameManager : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("b")) {
 			spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
-		}
-		if (Input.GetKeyDown ("s")) {
-			smite ((int)cameraLens.position.x, (int)cameraLens.position.y);
 		}
 	}
 }
