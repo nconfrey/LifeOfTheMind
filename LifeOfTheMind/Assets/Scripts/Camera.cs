@@ -11,7 +11,7 @@ public class Camera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float arg = Input.GetAxis("Vertical");
-		print ("about to access muse");
+		//print ("about to access muse");
 		if(Muse.acc_x > 0 || arg == 1)
 		//if head is right or up button pressed
 		{

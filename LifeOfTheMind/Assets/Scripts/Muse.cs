@@ -22,6 +22,10 @@ public class Muse : MonoBehaviour {
 	//TODO(emmi): consider adding acc_z (acc(1)), unlikely that we'll use
 	public static int blinks = 0;
 	public static int clenches = 0;	// Jaw clench count
+	public static string mood = "content";
+
+	/* headset data */
+	public static int battery = 0;
 
 	void Start() 
 	{
@@ -59,18 +63,43 @@ public class Muse : MonoBehaviour {
 					blinks++;
 				}
 			}
-
-			// note: should we be doing "if" or "else if"? the example code
-			//       just had ifs.. I suppose the real question is do we ever
-			//       receive more than one address at a time? if we only
-			//       receive one at a time, then we use "else if"'s. 
+				
 			else if (addr == "/muse/elements/jaw_clench") {
 				bool clench = (bool) messageReceived.Arguments[0];
 				if (clench) {
 					clenches++;
 				}
 			}
-		};
+
+			if(addr == "/muse/elements/experimental/concentration") {
+				float focus = (float)messageReceived.Arguments[0];
+
+				if (focus >= 0.75 && mood != "studious") {
+					mood = "studious";
+					print("mood update: studious");
+				} else if (focus < 0.75  && mood == "studious") {
+					mood = "content";
+					print("mood update: content");
+				}
+			}
+
+			if(addr == "/muse/elements/experimental/mellow") {
+				float mellow = (float)messageReceived.Arguments[0];
+
+				if (mellow >= 0.75 && mood == "content") {
+					mood = "mellow";
+					print("mood update: mellow");
+				} else if (mellow < 0.75  && mood == "mellow") {
+					mood = "content";
+					print("mood update: content");
+				}
+			}
+
+			if(addr == "/muse/batt") {
+				if (battery != (int)messageReceived.Arguments[0]) {
+					battery = (int)messageReceived.Arguments[0];
+				}
+			}
 
 		// Create an OSC server.
 		listener = new UDPListener(5000, callback);
