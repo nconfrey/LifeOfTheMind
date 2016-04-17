@@ -14,7 +14,8 @@ public class Player : MonoBehaviour {
 	private Animator animator;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		tr = gameObject.GetComponent<Transform>();
 		animator = GetComponent<Animator>();
