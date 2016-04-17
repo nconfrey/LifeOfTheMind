@@ -14,17 +14,17 @@ public class WorldManager : MonoBehaviour {
 	public GameObject[] terrainSlices;
 
 	private Transform worldHolder;
-	private List <Vector3> slicePositions = new List<Vector3>;
+	private List <Vector3> slicePositions = new List<Vector3>();
 
 	//Create a list with all the positions of terrain slices
 	void initializeSlices()
 	{
 		slicePositions.Clear();
 		//these constants are based on the scale of the slices
-		List<Vector3> firstQuad = new List<Vector3>;
-		firstQuad.Add(new Vector2(11,27));
-		firstQuad.Add(new Vector2(25.5,18));
-		firstQuad.Add(new Vector2(34,3.4));
+		List<Vector3> firstQuad = new List<Vector3>();
+		firstQuad.Add(new Vector2(11.0f,27.0f));
+		firstQuad.Add(new Vector2(25.5f,18.0f));
+		firstQuad.Add(new Vector2(34f,3.4f));
 
 		//First Quad
 		for(int i = 0; i < 3; i++)
@@ -58,6 +58,8 @@ public class WorldManager : MonoBehaviour {
 			//Choose a random terrain and prepare to instantiate it.
 			GameObject toInstantiate = terrainSlices[Random.Range (0,terrainSlices.Length)];
 			//Instantiate the GameObject instance using the prefab chosen for toInstantiate at the right location.
+			float x = slicePositions[j].x;
+			float y = slicePositions [j].y;
 			GameObject instance =
 				Instantiate (toInstantiate, new Vector3 (x, y, 30 * j), Quaternion.identity) as GameObject;
 
@@ -68,7 +70,7 @@ public class WorldManager : MonoBehaviour {
 
 	void addVillager(int xLoc, int yLoc)
 	{
-		GameObject villagerChoice = villagers[Random.Range(0, villagers.Length())];
+		GameObject villagerChoice = villagers[Random.Range(0, villagers.Length)];
 		Instantiate (villagerChoice, new Vector3 (xLoc, yLoc, 0), Quaternion.identity);
 	}
 }

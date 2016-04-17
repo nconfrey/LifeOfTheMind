@@ -7,7 +7,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	public WorldManager worldScript
+	public WorldManager worldScript;
 
 	// Use this for initialization
 	void Start () {
