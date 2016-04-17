@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 	//Store a reference to set up our board
 	private WorldManager boardScript;
+	public Lightning lightningMover;
 
 	public GameObject prefabBoyer;
 	public GameObject camera;
@@ -68,10 +69,11 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-//	public void smite(int x, int y)
-//	{
-//		Instantiate (lightning, new Vector3(x,y, -1), Quaternion.identity);
-//	}
+	public void smite()
+	{
+		lightningMover.smite (new Vector3 ((int)cameraLens.position.x, (int)cameraLens.position.y, -1), 
+			new Vector3 ((int)cameraLens.position.x, (int)cameraLens.position.y - 40, -1));
+	}
 
 	void moveVillagers()
 	{
@@ -91,6 +93,9 @@ public class GameManager : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("b")) {
 			spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
+		}
+		if (Input.GetKeyDown ("s")) {
+			smite ();
 		}
 	}
 }

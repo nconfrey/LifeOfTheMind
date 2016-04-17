@@ -23,14 +23,16 @@ public class Lightning : MonoBehaviour {
 	
 	}
 
-	public void smite()
+	public void smite(Vector3 start, Vector3 end)
 	{
 		moving = true;
+		StartCoroutine (SmoothMovement (start, end));
 	}
 
 	//Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
-	protected IEnumerator SmoothMovement (Vector3 end)
+	protected IEnumerator SmoothMovement (Vector3 start, Vector3 end)
 	{
+		transform.position = start;
 		//Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
 		//Square magnitude is used instead of magnitude because it's computationally cheaper.
 		float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -57,7 +59,7 @@ public class Lightning : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (moving) {
-			StartCoroutine (SmoothMovement (new Vector3(0,50,1)));
+			
 			moving = false;
 		}
 	}
