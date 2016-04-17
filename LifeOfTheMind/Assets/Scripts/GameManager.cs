@@ -76,8 +76,14 @@ public class GameManager : MonoBehaviour {
 	{
 		moveVillagers ();
 
-		if (Input.GetKeyDown ("space")) {
-			createNewVillager (20, 100);
+		if (Input.GetKeyDown ("space") || (Muse.blinks > 0)) {
+			if (blinks > 1) {
+				for (int i = 0; i < blinks; i++) {
+					createNewVillager (20, 100);
+				}
+			} else {
+				createNewVillager (20, 100);
+			}
 		}
 		if (Input.GetKeyDown ("b")) {
 			spawnBoyer (5, 50);
