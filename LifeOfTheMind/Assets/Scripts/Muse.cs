@@ -8,6 +8,7 @@ public class Muse : MonoBehaviour {
 	public UDPListener listener;
 
 	public static int blinks = 0;
+	public static int clenches = 0;	// Jaw clench count
 
 	void Start() 
 	{
@@ -37,6 +38,17 @@ public class Muse : MonoBehaviour {
 					print("blinks: " + blinks);
 				}
 			}
+
+			// note: should we be doing "if" or "else if"? the example code
+			//       just had ifs.. I suppose the real question is do we ever
+			//       receive more than one address at a time? if we only
+			//       receive one at a time, then we use "else if"'s. 
+			else if (addr == "/muse/elements/jaw_clench") {
+				bool clench = (bool) messageReceived.Arguments[0];
+				if (clench) {
+					clenches++;
+				}
+			}
 		};
 
 		// Create an OSC server.
@@ -46,7 +58,7 @@ public class Muse : MonoBehaviour {
 
 	void Update() 
 	{
-		blinks = 0;
+		clenches = 0;
 	}
 
 	void OnApplicationQuit() 
