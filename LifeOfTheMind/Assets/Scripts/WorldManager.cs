@@ -48,15 +48,15 @@ public class WorldManager : MonoBehaviour {
 			Vector2 n = new Vector2(firstQuad[i].x * -1, firstQuad[i].y);
 			slicePositions.Add(n);
 		}
-		print (slicePositions.Count);
-		print ("Done creating slice locations");
+		//print (slicePositions.Count);
+		//print ("Done creating slice locations");
 	}
 
 	public void worldSetup()
 	{
 		initializeSlices ();
 		worldHolder = new GameObject ("world").transform;
-		print ("Created our gameobject transform");
+		//print ("Created our gameobject transform");
 		for(int j = 1; j < 12; j++)
 		{
 			//Choose a random terrain and prepare to instantiate it.

@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour {
 
 	public void createNewVillager(int xLoc, int yLoc)
 	{
-		print ("Going to add a villager");
+		//print ("Going to add a villager");
 		Villager dude = new Villager(villagers[(int)Random.Range(0,3)]);
 		GameObject inst = Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity) as GameObject;
 		villagerList.Add (dude);
@@ -88,12 +88,14 @@ public class GameManager : MonoBehaviour {
 	{
 		moveVillagers ();
 
-		if (Input.GetKeyDown ("space")) {
-			createNewVillager ((int)cameraLens.position.x, (int)cameraLens.position.y);
+		if (Input.GetKeyDown ("space") || (Muse.blinks >= 2)) {
+			if (Muse.mood == "studious") {
+				spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
+			} else {
+				createNewVillager ((int)cameraLens.position.x, (int)cameraLens.position.y);
+			}
 		}
-		if (Input.GetKeyDown ("b")) {
-			spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
-		}
+
 		if (Input.GetKeyDown ("s")) {
 			smite ();
 		}
