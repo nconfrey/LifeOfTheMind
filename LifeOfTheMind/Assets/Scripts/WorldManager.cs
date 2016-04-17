@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 
 public class WorldManager : MonoBehaviour {
 
-	public GameObject[] villagers;
 	public GameObject[] terrainSlices;
 
 	private Transform worldHolder;
@@ -34,26 +33,31 @@ public class WorldManager : MonoBehaviour {
 		//Second Quad
 		for(int i = 0; i < 3; i++)
 		{
-			slicePositions.Add(firstQuad[i] * -1);
+			Vector2 n = new Vector2(firstQuad[i].x, firstQuad[i].y * -1);
+			slicePositions.Add(n);
 		}
 		//Third Quad
 		for(int i = 0; i < 3; i++)
 		{
-			Vector2 n = new Vector2(firstQuad[i].x, firstQuad[i].y *1);
-			slicePositions.Add(n);
+			slicePositions.Add(firstQuad[i] * -1);
 		}
+
 		//Fourth Quad
 		for(int i = 0; i < 3; i++)
 		{
 			Vector2 n = new Vector2(firstQuad[i].x * -1, firstQuad[i].y);
 			slicePositions.Add(n);
 		}
+		print (slicePositions.Count);
+		print ("Done creating slice locations");
 	}
 
-	void worldSetup()
+	public void worldSetup()
 	{
+		initializeSlices ();
 		worldHolder = new GameObject ("world").transform;
-		for(int j = 1; j <= 12; j++)
+		print ("Created our gameobject transform");
+		for(int j = 1; j < 12; j++)
 		{
 			//Choose a random terrain and prepare to instantiate it.
 			GameObject toInstantiate = terrainSlices[Random.Range (0,terrainSlices.Length)];
@@ -61,16 +65,11 @@ public class WorldManager : MonoBehaviour {
 			float x = slicePositions[j].x;
 			float y = slicePositions [j].y;
 			GameObject instance =
-				Instantiate (toInstantiate, new Vector3 (x, y, 30 * j), Quaternion.identity) as GameObject;
+				Instantiate (toInstantiate, new Vector3 (x, y, 0), new Quaternion(0,0,0,0)) as GameObject;
+			instance.GetComponent<Transform> ().Rotate (new Vector3 (0, 0, -30 * j));
 
 			//Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
 			instance.transform.SetParent (worldHolder);
 		}
-	}
-
-	void addVillager(int xLoc, int yLoc)
-	{
-		GameObject villagerChoice = villagers[Random.Range(0, villagers.Length)];
-		Instantiate (villagerChoice, new Vector3 (xLoc, yLoc, 0), Quaternion.identity);
 	}
 }

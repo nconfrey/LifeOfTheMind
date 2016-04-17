@@ -11,7 +11,7 @@ public class Muse : MonoBehaviour {
 	{
 		// Callback function for received OSC messages. 
 		// Prints EEG and Relative Alpha data only.
-		print("starting muse serv");
+		//print("starting muse serv");
 		HandleOscPacket callback = delegate(OscPacket packet)
 		{
 			var messageReceived = (OscMessage)packet;

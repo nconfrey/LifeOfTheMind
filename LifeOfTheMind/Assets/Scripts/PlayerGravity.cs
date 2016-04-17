@@ -11,6 +11,7 @@ public class PlayerGravity : MonoBehaviour {
 		GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 		GetComponent<Rigidbody2D>().gravityScale = 0;
 		myTransform = transform;
+		attractor = GameManager.instance.planet;
 	
 	}
 	
