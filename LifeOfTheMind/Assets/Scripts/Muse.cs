@@ -13,7 +13,7 @@ public class Muse : MonoBehaviour {
 	public static int clenches = 0;	// Jaw clench count
 	public static string mood = "content";
 	public static int battery = 0;
-
+	public static bool registered_UD = false;	// used to get behavior similar to Input.GetKeyDown()
 
 	/* Constants for use with accelerometer data. */
 	private const int UD = 0;		// Array access for up/down
@@ -129,6 +129,10 @@ public class Muse : MonoBehaviour {
 				acc_dt[i] += 1.0f;
 			} else {
 				acc_dt[i] = 0f;
+
+				if (i == UD) {
+					registered_UD = false;	// We're back in neutral position.
+				}
 			}
 		}
 
@@ -170,7 +174,17 @@ public class Muse : MonoBehaviour {
 		}
 		return velocity;
 	}
-
-
-
+		
+	// note: right now this works for either up or down. unclean data :(
+	public static bool GetHeadDown()
+	{
+		float velocity = GetVelocityUpDown();
+		// if (!registered_UD && velocity < 0f) {
+		if (!registered_UD && velocity != 0f) {	// dirty hack because unclean data
+			registered_UD = true;
+			return true;
+		} else {
+			return false;
+		}
+	}
 }	

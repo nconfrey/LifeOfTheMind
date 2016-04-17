@@ -3,7 +3,7 @@
 ## Welcome
 
 Welcome to UChicago, home of "Life of the Mind" aka "Where Fun Goes to Die."  
-Here's a game that reflects what's going on on the inside of your mind. Think *Inside Out* (the movie) meets Pocket God.
+Here's a game that reflects what's going on on the inside of your mind. Think *Inside Out* (the movie) meets Pocket God. 
 
 ## Live Demo
 
