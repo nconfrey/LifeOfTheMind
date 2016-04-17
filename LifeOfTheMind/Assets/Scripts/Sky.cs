@@ -16,7 +16,8 @@ public class Sky : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
+		// controls: switch day/night with head down or key down
+		if (Muse.GetHeadDown() || Input.GetKeyDown(KeyCode.DownArrow)) { 
 			Sprite currentSprite = spriteRenderer.sprite;
 			if (currentSprite == background_day) {
 				spriteRenderer.sprite = background_night;
