@@ -5,9 +5,7 @@
 Welcome to UChicago, home of "Life of the Mind" aka "Where Fun Goes to Die."  
 Here's a game that reflects what's going on on the inside of your mind. Think *Inside Out* (the movie) meets Pocket God. 
 
-![alt text][spash]
-
-[splash]: https://github.com/nconfrey/LifeOfTheMind/blob/master/LifeOfTheMind/Assets/Animations/splash-screen.jpg "WELCOMETOYOURBRAIN"
+![alt text](https://github.com/nconfrey/LifeOfTheMind/blob/master/LifeOfTheMind/Assets/Animations/splash-screen.jpg)
 
 ## Setup
 
