@@ -31,3 +31,4 @@ sysinfo.txt
 
 # Mac things
 *~
+*.DS_Store
