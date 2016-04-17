@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
 			//no force
 		}
 		velocity = rb.velocity.magnitude;
-		print (velocity);
+		//print (velocity);
 		if (velocity > 0.01f)
 			animator.SetBool ("Moving", true);
 		else

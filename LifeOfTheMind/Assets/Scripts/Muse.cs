@@ -7,6 +7,8 @@ public class Muse : MonoBehaviour {
 
 	public UDPListener listener;
 
+	public static int blinks = 0;
+
 	void Start() 
 	{
 		// Callback function for received OSC messages. 
@@ -31,7 +33,8 @@ public class Muse : MonoBehaviour {
 			if(addr == "/muse/elements/blink") {
 				int blink = (int)messageReceived.Arguments[0];
 				if (blink == 1) {
-					print("blink!");
+					blinks++;
+					print("blinks: " + blinks);
 				}
 			}
 		};
@@ -43,7 +46,7 @@ public class Muse : MonoBehaviour {
 
 	void Update() 
 	{
-		
+		blinks = 0;
 	}
 
 	void OnApplicationQuit() 
