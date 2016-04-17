@@ -101,7 +101,11 @@ public class Muse : MonoBehaviour {
 	void Update() 
 	{
 		//reset public muse data
-		blinks = 0;
+		if (blinks >= 3 && blinks < 6) {
+			blinks = blinks - 3;
+		} else if (blinks >= 6) {
+			blinks = 0;
+		}
 		clenches = 0;
 	}
 

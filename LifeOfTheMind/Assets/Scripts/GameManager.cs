@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 
 	public void createNewVillager(int xLoc, int yLoc)
 	{
-		print ("Going to add a villager");
+		//print ("Going to add a villager");
 		Villager dude = new Villager(villagers[(int)Random.Range(0,3)]);
 		Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity);
 		villagerList.Add (dude);
@@ -76,17 +76,38 @@ public class GameManager : MonoBehaviour {
 	{
 		moveVillagers ();
 
-		if (Input.GetKeyDown ("space") || (Muse.blinks > 0)) {
-			if (blinks > 1) {
-				for (int i = 0; i < blinks; i++) {
+		if (Input.GetKeyDown ("space") || (Muse.blinks >= 3)) {
+			print ("blinks >= 3");
+//			int tempBlinks = Muse.blinks;
+//			print ("tempBlinks");
+//			while (tempBlinks % 3 == 0) {
+//				print ("while, tempBlinks = " + tempBlinks);
+				if (Muse.mood == "studious") {
+					spawnBoyer (5, 50);
+				} else {
 					createNewVillager (20, 100);
 				}
-			} else {
-				createNewVillager (20, 100);
+//				tempBlinks -= 3;
 			}
-		}
-		if (Input.GetKeyDown ("b")) {
+//			if (Muse.blinks > 1) {
+//				print ("blinks > 1");
+//				for (int i = 0; i < Muse.blinks; i++) {
+//					if (Muse.mood == "studious") {
+//						spawnBoyer (5, 50);
+//					} else {
+//						createNewVillager (20, 100);
+//					}
+//				}
+//			} else {
+//				if (Muse.mood == "studious") {
+//					spawnBoyer (5, 50);
+//				} else {
+//					createNewVillager (20, 100);
+//				}
+//			}
+//		}
+		/*if (Input.GetKeyDown ("b") && (Muse.mood == "studious")) {
 			spawnBoyer (5, 50);
-		}
+		}*/
 	}
 }
