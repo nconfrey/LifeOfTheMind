@@ -57,13 +57,13 @@ public class GameManager : MonoBehaviour {
 	{
 		print ("Going to add a villager");
 		Villager dude = new Villager(villagers[(int)Random.Range(0,3)]);
-		Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity);
+		GameObject inst = Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity) as GameObject;
 		villagerList.Add (dude);
 	}
 
 	public void spawnBoyer(int x, int y)
 	{
-		Instantiate (prefabBoyer, new Vector3 (x, y, -1), Quaternion.identity);
+		GameObject inst = Instantiate (prefabBoyer, new Vector3 (x, y, -1), Quaternion.identity) as GameObject;
 
 	}
 
