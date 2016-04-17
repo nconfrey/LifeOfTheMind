@@ -12,6 +12,7 @@ public class Muse : MonoBehaviour {
 
 	public static int blinks = 0;
 	public static int clenches = 0;	// Jaw clench count
+	public static string mood = "content";
 
 
 	/* Constants for use with accelerometer data. */
