@@ -16,7 +16,7 @@ public class Muse : MonoBehaviour {
 		{
 			var messageReceived = (OscMessage)packet;
 			var addr = messageReceived.Address;
-			if(addr == "/muse/eeg") {
+			/*if(addr == "/muse/eeg") {
 				print("EEG values: ");
 				foreach(var arg in messageReceived.Arguments) {
 					print(arg + " ");
@@ -26,6 +26,12 @@ public class Muse : MonoBehaviour {
 			print("Relative Alpha power values: ");
 				foreach(var arg in messageReceived.Arguments) {
 					print(arg + " ");
+				}
+			} */
+			if(addr == "/muse/elements/blink") {
+				int blink = (int)messageReceived.Arguments[0];
+				if (blink == 1) {
+					print("blink!");
 				}
 			}
 		};
