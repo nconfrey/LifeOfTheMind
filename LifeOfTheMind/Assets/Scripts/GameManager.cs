@@ -66,5 +66,8 @@ public class GameManager : MonoBehaviour {
 	void Update()
 	{
 		moveVillagers ();
+		if (Input.GetKeyDown ("space")) {
+			createNewVillager (5, 50);
+		}
 	}
 }
