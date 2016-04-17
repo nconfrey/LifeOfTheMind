@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour {
 	private WorldManager boardScript;
 
 	public GameObject prefabBoyer;
+	public GameObject camera;
 
 	private List<Villager> villagerList;
 
 	public PlanetGravity planet;
+
+	private Transform cameraLens;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -38,12 +41,13 @@ public class GameManager : MonoBehaviour {
 		//Get a component reference to the attached BoardManager script
 		boardScript = GetComponent<WorldManager>();
 
+		cameraLens = camera.GetComponent<Transform> ();
+
 		//Setup villager list
 		villagerList = new List<Villager> ();
 		//this automatically adds itself to be the first in our new list
 		//and now automatically instantiates itself
 		createNewVillager(5,50);
-		//boardScript.addVillager (5,50);
 
 		//Uncomment this when we are ready to generate worlds
 		boardScript.worldSetup();
@@ -53,13 +57,13 @@ public class GameManager : MonoBehaviour {
 	{
 		//print ("Going to add a villager");
 		Villager dude = new Villager(villagers[(int)Random.Range(0,3)]);
-		Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity);
+		GameObject inst = Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity) as GameObject;
 		villagerList.Add (dude);
 	}
 
 	public void spawnBoyer(int x, int y)
 	{
-		Instantiate (prefabBoyer, new Vector3 (x, y, -1), Quaternion.identity);
+		GameObject inst = Instantiate (prefabBoyer, new Vector3 (x, y, -1), Quaternion.identity) as GameObject;
 
 	}
 
@@ -76,38 +80,13 @@ public class GameManager : MonoBehaviour {
 	{
 		moveVillagers ();
 
-		if (Input.GetKeyDown ("space") || (Muse.blinks >= 3)) {
-			print ("blinks >= 3");
-//			int tempBlinks = Muse.blinks;
-//			print ("tempBlinks");
-//			while (tempBlinks % 3 == 0) {
-//				print ("while, tempBlinks = " + tempBlinks);
-				if (Muse.mood == "studious") {
-					spawnBoyer (5, 50);
-				} else {
-					createNewVillager (20, 100);
-				}
-//				tempBlinks -= 3;
+		if (Input.GetKeyDown ("space") || (Muse.blinks >= 2)) {
+			if (Muse.mood == "studious") {
+				spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
+			} else {
+				createNewVillager ((int)cameraLens.position.x, (int)cameraLens.position.y);
 			}
-//			if (Muse.blinks > 1) {
-//				print ("blinks > 1");
-//				for (int i = 0; i < Muse.blinks; i++) {
-//					if (Muse.mood == "studious") {
-//						spawnBoyer (5, 50);
-//					} else {
-//						createNewVillager (20, 100);
-//					}
-//				}
-//			} else {
-//				if (Muse.mood == "studious") {
-//					spawnBoyer (5, 50);
-//				} else {
-//					createNewVillager (20, 100);
-//				}
-//			}
-//		}
-		/*if (Input.GetKeyDown ("b") && (Muse.mood == "studious")) {
-			spawnBoyer (5, 50);
-		}*/
+		}
+
 	}
 }

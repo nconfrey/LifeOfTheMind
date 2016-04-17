@@ -9,7 +9,6 @@ public class Muse : MonoBehaviour {
 	public UDPListener listener;
 
 	/* muse information available to other scripts */
-
 	public static int blinks = 0;
 	public static int clenches = 0;	// Jaw clench count
 	public static string mood = "content";
@@ -101,10 +100,8 @@ public class Muse : MonoBehaviour {
 	void Update() 
 	{
 		//reset public muse data
-		if (blinks >= 3 && blinks < 6) {
-			blinks = blinks - 3;
-		} else if (blinks >= 6) {
-			blinks = 0;
+		if (blinks >= 2) {
+			blinks = blinks - 2;
 		}
 		clenches = 0;
 	}
@@ -132,14 +129,6 @@ public class Muse : MonoBehaviour {
 				acc_dt[i] += 1.0f;
 			} else {
 				acc_dt[i] = 0f;
-			}
-
-			if (i == LR) {
-				print ("data");
-				print (acc_data [i]);
-				print (acc_dt [i]);
-				print ("recent");
-				print (acc_recent [i]);
 			}
 		}
 
@@ -181,4 +170,7 @@ public class Muse : MonoBehaviour {
 		}
 		return velocity;
 	}
+
+
+
 }	

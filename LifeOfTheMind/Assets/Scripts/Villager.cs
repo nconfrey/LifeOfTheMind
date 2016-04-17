@@ -14,26 +14,35 @@ public class Villager : MonoBehaviour {
 
 	public Villager(GameObject ani)
 	{
+		print ("New creation of villager");
 		prefab = ani;
 	}
 	//Called on a new villager spawn
 	void Start () 
 	{
+		print ("Called start method");
 		boxCollider = prefab.GetComponent <BoxCollider2D> ();
-		rb = prefab.GetComponent <Rigidbody2D> ();
+		rb = GetComponent <Rigidbody2D> ();
+		tr = GetComponent <Transform> ();
+		if (rb == null) {
+			print ("This is where the bad happens");
+
+		}
 		animator = prefab.GetComponent<Animator> ();
 		inverseMoveTime = 1f / moveTime;
 	}
 
 	public void MoveLeft()
 	{
-		//rb.AddForce (tr.right * Speed);
+		//if (rb == null)
+		//	print ("ugh");
+		//rb.AddForce (Vector2.right * Speed);
 		//animator.SetInteger("Direction",-1);
 	}
 
 	public void MoveRight()
 	{
-		//rb.AddForce (tr.right * -1 * Speed);
-		//animator.SetInteger("Direction",1);
+		rb.AddForce (tr.right * -1 * Speed);
+		animator.SetInteger("Direction",1);
 	}
 }
