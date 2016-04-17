@@ -12,6 +12,8 @@ public class Villager : MonoBehaviour {
 	public GameObject prefab;
 	public float Speed = 10f;
 
+	private float randomSeed;
+
 	public Villager(GameObject ani)
 	{
 		print ("New creation of villager");
