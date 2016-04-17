@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject prefabBoyer;
 	public GameObject camera;
+	public GameObject lightning;
 
 	private List<Villager> villagerList;
 
@@ -67,6 +68,11 @@ public class GameManager : MonoBehaviour {
 
 	}
 
+	public void smite(int x, int y)
+	{
+		Instantiate (lightning, new Vector3(x,y, -1), Quaternion.identity);
+	}
+
 	void moveVillagers()
 	{
 		//For now, just keep all villagers moving left
@@ -85,6 +91,9 @@ public class GameManager : MonoBehaviour {
 		}
 		if (Input.GetKeyDown ("b")) {
 			spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
+		}
+		if (Input.GetKeyDown ("s")) {
+			smite ((int)cameraLens.position.x, (int)cameraLens.position.y);
 		}
 	}
 }
