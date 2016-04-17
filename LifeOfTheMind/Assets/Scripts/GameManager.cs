@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour {
 		createNewVillager(5,50);
 
 		//Uncomment this when we are ready to generate worlds
-		boardScript.worldSetup();
+		// TODO
+		//boardScript.worldSetup();
 	}
 
 	public void createNewVillager(int xLoc, int yLoc)
