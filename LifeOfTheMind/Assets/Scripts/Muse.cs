@@ -7,35 +7,56 @@ public class Muse : MonoBehaviour {
 
 	public UDPListener listener;
 
+	/* muse information available to other scripts */
+
+	/* acc(0) == up/down
+	 * y+ == down
+	 * y- == up 
+	*/
+	/* acc(2) = left/right
+	 * x+ == right
+	 * x- == left
+	 */
+	public static float acc_x = 0;
+	public static float acc_y = 0;
+	//TODO(emmi): consider adding acc_z (acc(1)), unlikely that we'll use
 	public static int blinks = 0;
 	public static int clenches = 0;	// Jaw clench count
 
 	void Start() 
 	{
 		// Callback function for received OSC messages. 
-		// Prints EEG and Relative Alpha data only.
 		print("starting muse serv");
+
 		HandleOscPacket callback = delegate(OscPacket packet)
 		{
 			var messageReceived = (OscMessage)packet;
 			var addr = messageReceived.Address;
-			/*if(addr == "/muse/eeg") {
-				print("EEG values: ");
-				foreach(var arg in messageReceived.Arguments) {
-					print(arg + " ");
+
+			if(addr == "/muse/acc") {
+				//head position and accleration
+				float temp_acc_y = (float)messageReceived.Arguments[0];
+				if (temp_acc_y < -300.0) {
+					//head up
+					acc_y = temp_acc_y;
+				} else if (temp_acc_y > 300.0) {
+					//head down
+					acc_y = temp_acc_y;
+				}
+				float temp_acc_x = (float)messageReceived.Arguments[2];
+				if (temp_acc_x < -200.0) {
+					//head left
+					acc_x = temp_acc_x;
+				} else if (temp_acc_x > 200.0) {
+					//head right
+					acc_x = temp_acc_x;
 				}
 			}
-			if(addr == "/muse/elements/alpha_relative") {
-			print("Relative Alpha power values: ");
-				foreach(var arg in messageReceived.Arguments) {
-					print(arg + " ");
-				}
-			} */
+
 			if(addr == "/muse/elements/blink") {
 				int blink = (int)messageReceived.Arguments[0];
 				if (blink == 1) {
 					blinks++;
-					print("blinks: " + blinks);
 				}
 			}
 
@@ -59,6 +80,10 @@ public class Muse : MonoBehaviour {
 	void Update() 
 	{
 		clenches = 0;
+		//reset public muse data
+		blinks = 0;
+		acc_y = 0;
+		acc_x = 0;
 	}
 
 	void OnApplicationQuit() 
