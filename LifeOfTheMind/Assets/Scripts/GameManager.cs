@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour {
 	private WorldManager boardScript;
 
 	public GameObject prefabBoyer;
+	public GameObject camera;
 
 	private List<Villager> villagerList;
 
 	public PlanetGravity planet;
+
+	private Transform cameraLens;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -38,12 +41,13 @@ public class GameManager : MonoBehaviour {
 		//Get a component reference to the attached BoardManager script
 		boardScript = GetComponent<WorldManager>();
 
+		cameraLens = camera.GetComponent<Transform> ();
+
 		//Setup villager list
 		villagerList = new List<Villager> ();
 		//this automatically adds itself to be the first in our new list
 		//and now automatically instantiates itself
 		createNewVillager(5,50);
-		//boardScript.addVillager (5,50);
 
 		//Uncomment this when we are ready to generate worlds
 		boardScript.worldSetup();
@@ -77,10 +81,10 @@ public class GameManager : MonoBehaviour {
 		moveVillagers ();
 
 		if (Input.GetKeyDown ("space")) {
-			createNewVillager (20, 100);
+			createNewVillager ((int)cameraLens.position.x, (int)cameraLens.position.y);
 		}
 		if (Input.GetKeyDown ("b")) {
-			spawnBoyer (5, 50);
+			spawnBoyer ((int)cameraLens.position.x, (int)cameraLens.position.y);
 		}
 	}
 }
