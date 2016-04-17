@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 	//Store a reference to set up our board
 	private WorldManager boardScript;
+
+	public GameObject prefabBoyer;
+
 	private List<Villager> villagerList;
 
 	public PlanetGravity planet;
@@ -49,9 +52,15 @@ public class GameManager : MonoBehaviour {
 	public void createNewVillager(int xLoc, int yLoc)
 	{
 		print ("Going to add a villager");
-		Villager dude = new Villager(villagers[0]);
+		Villager dude = new Villager(villagers[(int)Random.Range(0,3)]);
 		Instantiate (dude.prefab, new Vector3 (xLoc, yLoc, -1), Quaternion.identity);
 		villagerList.Add (dude);
+	}
+
+	public void spawnBoyer(int x, int y)
+	{
+		Instantiate (prefabBoyer, new Vector3 (x, y, -1), Quaternion.identity);
+
 	}
 
 	void moveVillagers()
@@ -66,8 +75,12 @@ public class GameManager : MonoBehaviour {
 	void Update()
 	{
 		moveVillagers ();
+
 		if (Input.GetKeyDown ("space")) {
-			createNewVillager (5, 50);
+			createNewVillager (20, 100);
+		}
+		if (Input.GetKeyDown ("b")) {
+			spawnBoyer (5, 50);
 		}
 	}
 }

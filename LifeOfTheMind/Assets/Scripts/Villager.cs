@@ -27,7 +27,6 @@ public class Villager : MonoBehaviour {
 
 	public void MoveLeft()
 	{
-		print ("Would move left");
 		//rb.AddForce (tr.right * Speed);
 		//animator.SetInteger("Direction",-1);
 	}
