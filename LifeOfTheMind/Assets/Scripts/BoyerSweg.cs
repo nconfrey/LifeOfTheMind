@@ -15,7 +15,7 @@ public class BoyerSweg : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print ("yoo");
+		//print ("yoo");
 		rb.AddForce (tr.right * 10);
 	}
 }

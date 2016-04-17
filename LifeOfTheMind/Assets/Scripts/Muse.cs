@@ -100,7 +100,9 @@ public class Muse : MonoBehaviour {
 	void Update() 
 	{
 		//reset public muse data
-		blinks = 0;
+		if (blinks >= 2) {
+			blinks = blinks - 2;
+		}
 		clenches = 0;
 	}
 
@@ -172,7 +174,7 @@ public class Muse : MonoBehaviour {
 		}
 		return velocity;
 	}
-
+		
 	// note: right now this works for either up or down. unclean data :(
 	public static bool GetHeadDown()
 	{
